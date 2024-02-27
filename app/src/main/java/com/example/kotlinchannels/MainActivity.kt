@@ -34,6 +34,8 @@ class MainActivity : AppCompatActivity() {
     private fun channel(coroutineScope: CoroutineScope) {
         val channel: Channel<String> = Channel()
         coroutineScope.launch {
+            val result = channel.trySend("Aur btao ?") // this does not work for rendezvous channel
+            Log.i("Channel", "result ---> $result isSuccess ---> ${result.isSuccess} isClosed ----> ${result.isClosed} isFailed ----> ${result.isFailure}")
 //            delay(3000)
             Log.i("Channel", "Send ----> Element 1")
             channel.send("Element 1")
