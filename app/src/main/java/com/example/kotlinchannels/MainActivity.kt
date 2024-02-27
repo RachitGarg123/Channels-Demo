@@ -9,6 +9,7 @@ import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.ExperimentalCoroutinesApi
 import kotlinx.coroutines.channels.Channel
 import kotlinx.coroutines.channels.ReceiveChannel
+import kotlinx.coroutines.channels.SendChannel
 import kotlinx.coroutines.channels.consumeEach
 import kotlinx.coroutines.channels.produce
 import kotlinx.coroutines.launch
@@ -59,7 +60,9 @@ class MainActivity : AppCompatActivity() {
     private fun receiveChannel(coroutineScope: CoroutineScope) {
         var channel: ReceiveChannel<String> = Channel() // Receive Channel cannot send data back
         coroutineScope.launch {
-            channel = produce {// produces or emits a stream of values and returns an instance of ReceivedChannel to receive
+            // produces or emits a stream of values and returns an instance of ReceivedChannel to receive
+            // produce is preferred instead of sending data through normal channel.send() because it automatically closes the channels after emitting values.
+            channel = produce {
                 send("A")
                 send("B")
                 send("C")
