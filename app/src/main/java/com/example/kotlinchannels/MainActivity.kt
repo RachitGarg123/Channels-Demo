@@ -158,4 +158,16 @@ class MainActivity : AppCompatActivity() {
     private fun unlimitedChannel() {
         val channel = Channel<String>(Channel.UNLIMITED)
     }
+
+    // Multiple Coroutines can receive from a single channel
+    // We should use for loop as consumeEach is not safe to use
+    // consumeEach uses for loop under the hood but it also closes the channel once it has consumed all values
+    private fun fanOut() {
+
+    }
+
+    // Multiple coroutines can send to a single channel
+    private fun fanIn() {
+
+    }
 }
